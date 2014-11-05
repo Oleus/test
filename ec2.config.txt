@@ -1,0 +1,47 @@
+sudo yum install make automake gcc gcc-c++ kernel-devel git-core -y 
+sudo yum install python27-devel -y 
+sudo rm /usr/bin/python
+sudo ln -s /usr/bin/python2.7 /usr/bin/python 
+sudo cp /usr/bin/yum /usr/bin/_yum_before_27 
+sudo sed -i s/python/python2.6/g /usr/bin/yum 
+sudo sed -i s/python2.6/python2.6/g /usr/bin/yum 
+
+wget https://bootstrap.pypa.io/get-pip.py
+sudo python get-pip.py
+sudo /usr/bin/easy_install-2.7 pip 
+sudo pip install virtualenv
+
+sudo yum install zlib-devel.x86_64 libjpeg-devel freetype-devel.x86_64
+
+sudo pip install Pillow
+
+----------------------------------------------------------------------------------------------------------------------------
+
+test commands:
+python convert.py -i data/ -f jpg -t png -p 1
+python resize.py -i data/ -e jpg -h 100 -w 100 -p 1
+
+
+Convert test cases:
+
+python convert.py -i ../imaging-test/scripts/dataset/jpg/200x200/ -f jpg -t png -p 1
+python convert.py -i ../imaging-test/scripts/dataset/jpg/1000x1000/ -f jpg -t png -p 1
+
+
+Resize test cases:
+
+python resize.py -i ../imaging-test/scripts/dataset/jpg/200x200/ -e jpg -h 100 -w 100 -p 1
+
+python resize.py -i ../imaging-test/scripts/dataset/jpg/1000x1000/ -e jpg -h 100 -w 100 -p 1
+python resize.py -i ../imaging-test/scripts/dataset/jpg/1000x1000/ -e jpg -h 300 -w 300 -p 1
+python resize.py -i ../imaging-test/scripts/dataset/jpg/1000x1000/ -e jpg -h 500 -w 500 -p 1
+
+python resize.py -i ../imaging-test/scripts/dataset/jpg/3000x3000/ -e jpg -h 100 -w 100 -p 1
+python resize.py -i ../imaging-test/scripts/dataset/jpg/3000x3000/ -e jpg -h 300 -w 300 -p 1
+python resize.py -i ../imaging-test/scripts/dataset/jpg/3000x3000/ -e jpg -h 500 -w 500 -p 1
+python resize.py -i ../imaging-test/scripts/dataset/jpg/3000x3000/ -e jpg -h 1000 -w 1000 -p 1
+python resize.py -i ../imaging-test/scripts/dataset/jpg/3000x3000/ -e jpg -h 1500 -w 1500 -p 1
+python resize.py -i ../imaging-test/scripts/dataset/jpg/3000x3000/ -e jpg -h 2000 -w 2000 -p 1
+
+
+Note: for for some instances python27 should be used instead of python in commands.
